@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "aya-sandbox" do |c|
     c.vm.box = "generic/ubuntu2204"
     c.vbguest.auto_update = false
-    c.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+    c.vm.synced_folder ".", "/vagrant", type: "smb"
 
     c.vm.provider "virtualbox" do |v|
       v.name = "aya-sandbox"
