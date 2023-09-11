@@ -1,0 +1,2 @@
+[workspace]
+members = ["xtask", "chapter02", "chapter02-common"]
