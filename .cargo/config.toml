@@ -1,0 +1,9 @@
+[alias]
+xtask = "run --package xtask --"
+build-ebpf = "run --package xtask -- build-ebpf -c"
+build-us = "run --package xtask -- build-userspace -c"
+br = "run --package xtask -- build-run"
+r = "run --package xtask -- run"
+
+[env]
+RUST_LOG = "info"

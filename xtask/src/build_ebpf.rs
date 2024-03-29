@@ -37,14 +37,20 @@ pub struct Options {
     /// Build the release target
     #[clap(long)]
     pub release: bool,
+    /// Chapter to build
+    #[clap(short, long)]
+    pub chapter: u8,
 }
 
 pub fn build_ebpf(opts: Options) -> Result<(), anyhow::Error> {
-    let dir = PathBuf::from("chapter02-ebpf");
+    let chapter = format!("{:0>2}", opts.chapter);
+
     let target = format!("--target={}", opts.target);
+    let target_dir = format!("--target-dir=../../target/chapters/{chapter}");
     let mut args = vec![
         "build",
         target.as_str(),
+        target_dir.as_str(),
         "-Z",
         "build-std=core",
     ];
@@ -56,6 +62,7 @@ pub fn build_ebpf(opts: Options) -> Result<(), anyhow::Error> {
     // vars set by the cargo xtask command are also inherited. RUSTUP_TOOLCHAIN is removed
     // so the rust-toolchain.toml file in the -ebpf folder is honored.
 
+    let dir = PathBuf::from(format!("chapter{chapter}/ebpf"));
     let status = Command::new("cargo")
         .current_dir(dir)
         .env_remove("RUSTUP_TOOLCHAIN")

@@ -1,4 +1,5 @@
 mod build_ebpf;
+mod build_userspace;
 mod run;
 
 use std::process::exit;
@@ -14,6 +15,8 @@ pub struct Options {
 #[derive(Debug, Parser)]
 enum Command {
     BuildEbpf(build_ebpf::Options),
+    BuildUserspace(build_userspace::Options),
+    BuildRun(run::Options),
     Run(run::Options),
 }
 
@@ -23,6 +26,8 @@ fn main() {
     use Command::*;
     let ret = match opts.command {
         BuildEbpf(opts) => build_ebpf::build_ebpf(opts),
+        BuildUserspace(opts) => build_userspace::build_userspace(opts),
+        BuildRun(opts) => run::build_run(opts),
         Run(opts) => run::run(opts),
     };
 

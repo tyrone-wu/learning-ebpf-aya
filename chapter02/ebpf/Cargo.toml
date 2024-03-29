@@ -1,16 +1,12 @@
 [package]
-name = "chapter02-ebpf"
+name = "ebpf"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-aya-bpf = { git = "https://github.com/aya-rs/aya" }
+aya-ebpf = { git = "https://github.com/aya-rs/aya" }
 aya-log-ebpf = { git = "https://github.com/aya-rs/aya" }
-chapter02-common = { path = "../chapter02-common" }
-
-[[bin]]
-name = "chapter02"
-path = "src/main.rs"
+common = { path = "../common" }
 
 [profile.dev]
 opt-level = 3
