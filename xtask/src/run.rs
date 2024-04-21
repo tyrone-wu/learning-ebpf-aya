@@ -51,7 +51,7 @@ pub fn run(opts: Options) -> Result<(), anyhow::Error> {
     // profile we are building (release or debug)
     let chapter = format!("{:0>2}", opts.chapter);
     let profile = if opts.release { "release" } else { "debug" };
-    let bin_path = format!("target/chapters/{chapter}/{profile}/userspace");
+    let bin_path = format!("target/chapters/{chapter}/{profile}/userspace-{chapter}");
 
     // configure args
     let mut args: Vec<_> = opts.runner.trim().split_terminator(' ').collect();

@@ -7,6 +7,7 @@ use log::{debug, info, warn};
 mod hello;
 mod hello_buffer;
 mod hello_map;
+mod hello_tail;
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -35,11 +36,11 @@ async fn main() -> Result<(), anyhow::Error> {
     // TODO: probly try to modularize the loading since only dir changes
     #[cfg(debug_assertions)]
     let mut bpf = Ebpf::load(include_bytes_aligned!(
-        "../../../target/chapters/02/bpfel-unknown-none/debug/ebpf"
+        "../../../target/chapters/02/bpfel-unknown-none/debug/ebpf-02"
     ))?;
     #[cfg(not(debug_assertions))]
     let mut bpf = Ebpf::load(include_bytes_aligned!(
-        "../../../target/chapters/02/bpfel-unknown-none/release/ebpf"
+        "../../../target/chapters/02/bpfel-unknown-none/release/ebpf-02"
     ))?;
     if let Err(e) = EbpfLogger::init(&mut bpf) {
         // This can happen if you remove all log statements from your eBPF program.
@@ -50,6 +51,7 @@ async fn main() -> Result<(), anyhow::Error> {
         "hello" => hello::hello(&mut bpf).await?,
         "hello_map" => hello_map::hello_map(&mut bpf).await?,
         "hello_buffer" => hello_buffer::hello_buffer(&mut bpf).await?,
+        "hello_tail" => hello_tail::hello_tail(&mut bpf).await?,
         _ => panic!("Program {} does not exist.", args[1]),
     }
 

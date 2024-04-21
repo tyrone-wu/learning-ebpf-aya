@@ -4,6 +4,7 @@
 mod hello;
 mod hello_map;
 mod hello_buffer;
+mod hello_tail;
 
 #[panic_handler]
 fn panic(_info: &core::panic::PanicInfo) -> ! {

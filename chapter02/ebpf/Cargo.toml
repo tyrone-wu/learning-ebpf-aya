@@ -1,12 +1,12 @@
 [package]
-name = "ebpf"
+name = "ebpf-02"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 aya-ebpf = { git = "https://github.com/aya-rs/aya" }
 aya-log-ebpf = { git = "https://github.com/aya-rs/aya" }
-common = { path = "../common" }
+common-02 = { path = "../common" }
 
 [profile.dev]
 opt-level = 3
