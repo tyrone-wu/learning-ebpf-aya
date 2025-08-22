@@ -1,6 +1,6 @@
+use std::str;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
-use std::str;
 
 use aya::maps::RingBuf;
 use aya::programs::KProbe;
@@ -40,12 +40,14 @@ pub(crate) async fn hello_buffer(bpf: &mut Ebpf) -> Result<(), anyhow::Error> {
 
                 // no need to manually decode, cast to DataT pointer
                 let data_t = raw.as_ptr() as *const DataT;
-                let (pid, uid, command, message) = unsafe {(
-                    (*data_t).pid,
-                    (*data_t).uid,
-                    str::from_utf8(&(*data_t).command)?,
-                    str::from_utf8(&(*data_t).message)?,
-                )};
+                let (pid, uid, command, message) = unsafe {
+                    (
+                        (*data_t).pid,
+                        (*data_t).uid,
+                        str::from_utf8(&(*data_t).command)?,
+                        str::from_utf8(&(*data_t).message)?,
+                    )
+                };
 
                 info!("pid: {pid}\tuid: {uid}\tcmd: {command}\tmsg: {message}");
             }

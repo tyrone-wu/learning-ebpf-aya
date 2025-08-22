@@ -2,5 +2,6 @@
   "rust-analyzer.linkedProjects": [
     "Cargo.toml", 
     "chapter02/ebpf/Cargo.toml",
-  ]
+    "chapter03/ebpf/Cargo.toml",
+  ],
 }
